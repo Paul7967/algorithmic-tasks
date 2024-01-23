@@ -29,7 +29,43 @@
  * @return {number}
  */
 var lengthOfLongestSubstring = function (s) {
+    const substr = new Set();
     let result = 0;
+    let currSignIndex = 0;
+
+    const makeUniqueSet = (inVal) => {
+        let beforeInValFlag = true;
+
+        for (const item of substr) {
+            if (substr.has(inVal)) {
+                // удаляем повторяющийся символ
+                beforeInValFlag = false;
+                substr.delete(item);
+            }
+            if (beforeInValFlag) {
+                //удаляем все символы до повторяющегося
+                substr.delete(item);
+            }
+        }
+        substr.add(inVal);
+    };
+
+    while (currSignIndex < s.length) {
+        const currSign = s[currSignIndex];
+        if (!substr.has(currSign)) {
+            substr.add(currSign);
+            if (substr.size > result) result = substr.size;
+        } else {
+            makeUniqueSet(currSign);
+        }
+
+        currSignIndex++;
+    }
 
     return result;
 };
+
+// console.log(lengthOfLongestSubstring("abcabcbb"));
+// console.log(lengthOfLongestSubstring("bbbbb"));
+// console.log(lengthOfLongestSubstring("pwwkew"));
+console.log(lengthOfLongestSubstring("dvdf"));
