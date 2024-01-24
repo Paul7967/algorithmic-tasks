@@ -32,17 +32,23 @@
 // пишем решение без приведения к строке
 var isPalindrome = function (x) {
     if (x < 0) return false;
-    let intVal = 0;
+    let leftNumberSub = 0;
+    let rightNumberSub = 0;
+
     const numDigits = Math.floor(Math.log10(x)) + 1;
     if (numDigits === 1) return true;
     const countCicles = Math.floor(numDigits / 2);
 
     for (let rateOf10 = 0; rateOf10 < countCicles; rateOf10++) {
         const leftNumberOrder = 10 ** (numDigits - rateOf10 - 1);
-        const leftNumber = Math.floor((x - intVal) / leftNumberOrder);
-        intVal += leftNumber * leftNumberOrder;
+        const leftNumber = Math.floor((x - leftNumberSub) / leftNumberOrder);
+        leftNumberSub += leftNumber * leftNumberOrder;
 
-        const rightNumber = Math.floor(x % 10 ** (rateOf10 + 1));
+        const rightNumberOrder = 10 ** rateOf10;
+        const rightNumber =
+            Math.floor((x - rightNumberSub) % 10 ** (rateOf10 + 1)) /
+            rightNumberOrder;
+        rightNumberSub += rightNumber * rightNumberOrder;
 
         if (leftNumber !== rightNumber) {
             return false;
@@ -55,7 +61,5 @@ var isPalindrome = function (x) {
 // console.log(isPalindrome(121));
 // console.log(isPalindrome(-121));
 // console.log(isPalindrome(10));
-// console.log(isPalindrome(1001));
+console.log(isPalindrome(1001));
 console.log(isPalindrome(1231));
-
-// ntbd: Осталось корректно формировать rightNumber, там нужно вычитать числа нижнего порядка и делить на его разряд
