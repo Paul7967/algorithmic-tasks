@@ -29,4 +29,32 @@
  * @param {ListNode} head
  * @return {boolean}
  */
-var isPalindrome = function (head) {};
+
+// неоптимальное решение, требуется доработка
+var isPalindrome = function (head) {
+    let curNode = head;
+    const arr = [];
+
+    while (curNode) {
+        arr.push(curNode.val);
+        curNode = curNode.next;
+    }
+
+    const result = arr.join('') === arr.reverse().join('');
+    return result;
+};
+
+const headNode = {
+    val: 1,
+    next: {
+        val: 2,
+        next: {
+            val: 2,
+            next: {
+                val: 1,
+                next: null,
+            },
+        },
+    },
+};
+console.log(isPalindrome(headNode));
