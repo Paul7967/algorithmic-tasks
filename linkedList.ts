@@ -18,6 +18,4 @@ class LinkedList {
 
 export const makeSingleLinkedListFromArray = (inArr: []) => {
     const result = {};
-
-   
 };
