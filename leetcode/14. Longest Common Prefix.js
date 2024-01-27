@@ -55,7 +55,20 @@ var longestCommonPrefix = function (strs) {
 
     let prefix = strs[0];
 
-    str.startsWith(s);
+    // проверить что все строки начинаются на prefix
+    for (let curStrIndex = 1; curStrIndex < strs.length; curStrIndex++) {
+        // если строка не начинается на prefix уменьшаем префикс на один символ справа
+        if (prefix.length && !strs[curStrIndex].startsWith(prefix)) {
+            prefix = prefix.slice(0, -1);
+            curStrIndex = 0;
+        }
+
+        if (prefix.length === 0) {
+            return "";
+        }
+    }
+
+    return prefix;
 };
 
 console.log(longestCommonPrefix(["flower", "flow", "flight"]));
