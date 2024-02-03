@@ -22,7 +22,7 @@
 // 0 <= Node.val <= 9
 // It is guaranteed that the list represents a number that does not have leading zeros.
 
-class ListNode {
+export class ListNode {
     val: number;
     next: ListNode | null;
     constructor(val?: number, next?: ListNode | null) {
