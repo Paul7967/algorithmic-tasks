@@ -26,6 +26,18 @@ export class ListNode {
 
         return result;
     }
+
+    leftListToArray() {
+        const nodes = [];
+        let currentNode: ListNode = this;
+
+        while (currentNode) {
+            nodes.push(currentNode);
+            currentNode = currentNode.next;
+        }
+
+        return nodes;
+    }
 }
 
 export class LinkedList {
