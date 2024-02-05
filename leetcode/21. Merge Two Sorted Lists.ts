@@ -33,7 +33,7 @@
 //     }
 // }
 
-import { ListNode, LinkedList } from "../linkedList";
+import { ListNode, LinkedList } from "../utils/linkedList";
 
 function mergeTwoLists(
     list1: ListNode | null,

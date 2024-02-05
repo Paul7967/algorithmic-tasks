@@ -36,7 +36,7 @@
  * @return {ListNode}
  */
 
-import { LinkedList, ListNode } from "../linkedList";
+import { LinkedList, ListNode } from "../utils/linkedList";
 
 function addTwoNumbers(
     l1: ListNode | null,
