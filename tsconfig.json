@@ -1,8 +1,9 @@
 {
     "compilerOptions": {
-      "target": "ES5",
+      "target": "ES6",
       "module": "CommonJS",
       "outDir": "out",
-      "sourceMap": true
+      "sourceMap": true,
+      "downlevelIteration": true
     }
   }
