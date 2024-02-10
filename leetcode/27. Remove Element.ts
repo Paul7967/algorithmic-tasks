@@ -45,7 +45,7 @@
  * @param {number} val
  * @return {number}
  */
-var removeElement = function (nums, val) {
+function removeElement(nums: number[], val: number): number {
     const newArr = [...nums];
     let counter = 0;
     for (let i = 0; i < newArr.length; i++) {
@@ -56,41 +56,37 @@ var removeElement = function (nums, val) {
         }
     }
 
-    return nums;
-};
+    return counter;
+}
 
-console.log(removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2));
+const res = removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2);
+console.log(res);
 
 // отдельно импортируется для возможности ввода таблицы входных параметров и тестирования в цикле
 import { test } from "@jest/globals";
-// import { expect, test } from "@jest/globals";
 
 describe("27", () => {
-    const testData = [
-        {
-            ex: 1,
-            input: {
-                arr: [0, 1, 2, 2, 3, 0, 4, 2],
-                val: 2,
-            },
-            expected: [0, 1, 3, 0, 4, 0, 4, 2],
-        },
-        { input: { arr: [3, 2, 2, 3], val: 3 }, expected: [2, 2, 2, 3] },
-    ];
+    test.each<{
+        arr: number[];
+        val: number;
+        funResut: number;
+        mutatedArr: number[];
+    }>`
+        arr                         | val  | mutatedArr                  | funResut
+        ${[0, 1, 2, 2, 3, 0, 4, 2]} | ${2} | ${[0, 1, 3, 0, 4, 0, 4, 2]} | ${5}
+        ${[3, 2, 2, 3]}             | ${3} | ${[2, 2, 2, 3]}             | ${2}
+    `(
+        `$arr - $val, результат $funResult, мутация в $mutatedArr`,
+        ({ arr, val, funResut, mutatedArr }) => {
+            const mutateArray = jest.fn(removeElement);
+            const result = mutateArray(arr, val);
+            expect(mutateArray).toHaveBeenCalledWith(arr, val);
 
-    test.each(testData)(
-        `Сумма %ex и %i должна быть %i`,
-        ({ input, expected }) => {
-            const { arr, val } = input;
-            expect(removeElement(arr, val)).toEqual(expected);
+            // проверка мутации входного массива
+            expect(arr).toEqual(mutatedArr);
+
+            // проверка значения возвращаемого функцией
+            expect(result).toBe(funResut);
         }
     );
-
-    test.each<{ arr: number[]; val: number; expected: number[] }>`
-        arr                         | val  | expected
-        ${[0, 1, 2, 2, 3, 0, 4, 2]} | ${2} | ${[0, 1, 3, 0, 4, 0, 4, 2]}
-        ${[3, 2, 2, 3]}             | ${3} | ${[2, 2, 2, 3]}
-    `(`$arr - $val, мутация $expected`, ({ arr, val, expected }) => {
-        expect(removeElement(arr, val)).toEqual(expected);
-    });
 });
