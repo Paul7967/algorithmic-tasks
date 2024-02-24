@@ -5,3 +5,6 @@
 
 # node_modules
 /node_modules
+
+# папка в которой содержатся файлы, которые я не хочу выгружать в репозиторий
+/gitIgnoreFolder
