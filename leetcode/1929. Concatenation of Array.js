@@ -42,6 +42,6 @@ var getConcatenation = function(nums) {
     return arr
 };
 
-// const result = getConcatenation([1,2,1]);
-const result = getConcatenation([1]);
+const result = getConcatenation([1,2,1]);
+// const result = getConcatenation([1]);
 console.log(result)
