@@ -1,9 +1,10 @@
 {
-    "compilerOptions": {
-      "target": "ES6",
-      "module": "CommonJS",
-      "outDir": "out",
-      "sourceMap": true,
-      "downlevelIteration": true
-    }
+  "compilerOptions": {
+    "target": "ES6",
+    "lib": ["ES2022"], // т.к. на литкоде ES2022
+    "module": "CommonJS",
+    "outDir": "out",
+    "sourceMap": true,
+    "downlevelIteration": true
   }
+}
