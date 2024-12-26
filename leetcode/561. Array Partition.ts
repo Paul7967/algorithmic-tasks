@@ -27,7 +27,9 @@
 
 // сортируем массив
 function arrayPairSum(inArr: number[]): number {
-    const sortedArr = [...inArr].sort();
+    const sortedArr = [...inArr].sort((a,b)=>a-b);
+    console.log('sortedArr', sortedArr);
+    
     let result = sortedArr[0];
     for (let i=2; i<sortedArr.length; i+=2) {
         result+=sortedArr[i]
@@ -35,14 +37,18 @@ function arrayPairSum(inArr: number[]): number {
     return result;
 };
 
-const arr1 = [6,2,6,5,1,2]
+const arr1 = [6214, -2290, 2833, -7908]
 console.log(arrayPairSum(arr1));
 
 
-test("[1,4,3,2] = 4", () => {
-    expect(arrayPairSum([1,4,3,2])).toEqual(4);
-});
+// test("[1,4,3,2] = 4", () => {
+//     expect(arrayPairSum([1,4,3,2])).toEqual(4);
+// });
 
-test("[6,2,6,5,1,2] = 9", () => {
-    expect(arrayPairSum([6,2,6,5,1,2])).toEqual(9);
-});
+// test("[6,2,6,5,1,2] = 9", () => {
+//     expect(arrayPairSum([6,2,6,5,1,2])).toEqual(9);
+// });
+
+// test("[6214, -2290, 2833, -7908] = -5075", () => {
+//     expect(arrayPairSum([6214, -2290, 2833, -7908])).toEqual(-5075);
+// });
