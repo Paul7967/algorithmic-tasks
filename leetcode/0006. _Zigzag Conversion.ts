@@ -34,58 +34,30 @@
 // s consists of English letters (lower-case and upper-case), ',' and '.'.
 // 1 <= numRows <= 1000
 
-// другой вариант решения: на лету формировать строки для каждой строки массива и в конце их склеить
-
 function convert(s: string, numRows: number): string {
     if (numRows===1) return s;
-    const oneCycleSymbols = numRows*2-2; // количество символов в одном цикле
-    const oneCycleColumns = numRows - 1; // количество колонок в одном цикле
-    const arrWidthInsideCycle = (strLength) => {
-        if (strLength<=numRows) return 1;
-        if (strLength>numRows && strLength<=oneCycleSymbols) {
-            return (strLength-numRows) + 1;
-        }
-    }
-    
-    let arrWidth = 0;
-    const {length} = s;
-    if (length<=oneCycleSymbols) arrWidth=arrWidthInsideCycle(length)
-    else arrWidth = Math.floor(s.length/oneCycleSymbols)*oneCycleColumns + 
-       arrWidthInsideCycle(length%oneCycleSymbols) 
-    
-        let x = 0, y = 0;
 
-    const arr: string[][] = new Array(arrWidth).fill('').map(()=> Array(numRows).fill('')); 
-    
+    const { length } = s;
+
+    const arr: string[] = new Array(numRows).fill('');
+
     let directionUp = false;
-
-    const step = () => {
-        if (y===numRows-1) directionUp=true;
-        if (y===0) directionUp=false;
-
-        if (directionUp) { 
-            y--;
-            x++;
-        } else { 
-            y++;
-        };
-
-    }
-
-    for (let simbIndex=0; simbIndex<length; simbIndex++) {
-        arr[x][y] = s[simbIndex];
-        step();
-    }
-
-    let result = '';
-    for (let y=0; y<numRows; y++) {
-        for (let x=0; x<arrWidth; x++) {
-                if (arr[x][y]!=='') result = `${result}${arr[x][y]}`
+    let rowIndex = 0;
+    for (let i=0; i<length; i++) {
+        arr[rowIndex] = `${arr[rowIndex]}${s[i]}`;
+        if (!directionUp && rowIndex<numRows-1) rowIndex++
+        else if (!directionUp && rowIndex===numRows-1) {
+            directionUp=true;
+            rowIndex--;
+        } else if (directionUp && rowIndex>0) rowIndex--
+        else if (directionUp && rowIndex===0) {
+            directionUp=false;
+            rowIndex++;
         }
     }
 
-    return result
-};
+    return arr.reduce((prevV,currV)=>`${prevV}${currV}`, "");
+}
 
 const s = 'Apalindromeisaword,phrase,number,orothersequenceofunitsthatcanbereadthesamewayineitherdirection,withgeneralallowancesforadjustmentstopunctuationandworddividers.'; 
 const numRows = 10;
