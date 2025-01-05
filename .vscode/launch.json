@@ -24,9 +24,8 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug TypeScript File",
-      // указываем путь r ts файлу для запуска в отладчике
-      "program": "${workspaceFolder}/leetcode/0006. _Zigzag Conversion.ts",
+      "name": "Debug Current TypeScript File",
+      "program": "${file}",
       "preLaunchTask": "tsc: build - tsconfig.json",
       "outFiles": ["${workspaceFolder}/out/**/*.js"],
       "runtimeExecutable": "node",
