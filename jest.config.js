@@ -2,8 +2,8 @@
 module.exports = {
     preset: "ts-jest",
     testEnvironment: "node",
-    runMode: "on-demand",
     watchAll: false,
+    maxWorkers: 6,  // Ограничиваем количество параллельных процессов, чтобы не отъедать ресурсы у системы
     testMatch: ["**/leetcode/*.[jt]s?(x)"],
     testPathIgnorePatterns: [
         "/node_modules/",
